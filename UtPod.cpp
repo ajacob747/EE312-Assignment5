@@ -17,9 +17,9 @@
         songs == NULL;
     }
     int UtPod::addSong(Song const &s) {
-        if (s.getSize()>getRemainingMemory())
-            return NO_MEMORY;
-        SongNode *newSong;
+//      if (s.getSize()>getRemainingMemory())
+//            return NO_MEMORY;
+        struct SongNode *newSong;
         newSong->s = s;
         newSong->next = NULL;
         SongNode *tracker = songs;
@@ -55,4 +55,16 @@
             return NOT_FOUND;
         trail->next = tracker->next;
         delete(tracker);
+        return SUCCESS;
+    }
+
+    void UtPod::shuffle() {
+
+    }
+    void UtPod::showSongList() {
+        SongNode *tracker = songs;
+        while(tracker!=NULL){
+            cout<<tracker->s.getTitle()+" "+ tracker->s.getArtist()+" "+tracker->s.getTitle()<<endl;
+            tracker = tracker->next;
+        }
     }

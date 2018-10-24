@@ -20,7 +20,7 @@ private:
 
 public:
     Song(string title, string artist, int size);
-    ~Song();
+    //   ~Song();
 
     string getTitle();
     void setTitle(string title);
