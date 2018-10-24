@@ -34,5 +34,25 @@
     }
 
     int UtPod::removeSong(Song const &s) {
+        SongNode *tracker = songs;
+        SongNode *trail = NULL;
 
+        if(tracker != NULL && tracker->s == s){
+            songs = tracker->next;
+            delete(tracker);
+            return SUCCESS;
+        }
+        bool found = false;
+
+        while(found==false && tracker!=NULL){
+            trail = tracker;
+            tracker = tracker->next;
+            if(tracker->s == s){
+                found = true;
+            }
+        }
+        if(tracker == NULL)
+            return NOT_FOUND;
+        trail->next = tracker->next;
+        delete(tracker);
     }
