@@ -9,19 +9,54 @@
         this->artist = artist;
         this->size = size;
     }
+    string Song::getTitle() {
+        return title;
+    }
     void Song::setTitle(string title){
         this->title = title;
     }
-    string Song::getArtist() const{
+    string Song::getArtist() const {
         return artist;
     }
 
-    void Song::setArtist(string artist){
+    void Song::setArtist(string artist) {
         this->artist = artist;
     }
     int Song::getSize() const{
         return size;
     }
-    void Song::setSize(int size){
+    void Song::setSize(int size) {
         this->size = size;
+    }
+    bool Song::operator==(Song const &rhs) {
+        if(this-> artist == rhs.artist && this->title == rhs.title && this->size == rhs.size)
+            return true;
+        return false;
+    }
+    bool Song::operator>(Song const &rhs) {
+        if (this->artist > rhs.artist)
+            return true;
+        else if (this->artist == rhs.artist) {
+            if (this->title > rhs.title)
+                return true;
+            else if (this->title == rhs.title) {
+                if (this->size > rhs.size)
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    bool Song::operator<(Song const &rhs){
+        if (this->artist < rhs.artist)
+            return true;
+        else if (this->artist == rhs.artist) {
+            if (this->title < rhs.title)
+                return true;
+            else if (this->title == rhs.title) {
+                if (this->size < rhs.size)
+                    return true;
+            }
+        }
+        return false;
     }

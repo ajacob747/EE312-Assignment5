@@ -31,6 +31,9 @@ public:
     int getSize() const;
     void setSize(int size);
 
+    bool operator == (Song const &rhs);
+    bool operator < (Song const &rhs);
+    bool operator > (Song const &rhs);
 };
 
 #endif //ASSIGNMENT5_SONG_H
