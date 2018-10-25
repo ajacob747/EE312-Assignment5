@@ -19,13 +19,13 @@
     int UtPod::addSong(Song const &s) {
 //      if (s.getSize()>getRemainingMemory())
 //            return NO_MEMORY;
-        struct SongNode *newSong;
+        SongNode *newSong = new SongNode;
         newSong->s = s;
         newSong->next = NULL;
         SongNode *tracker = songs;
 
         if(tracker == NULL)
-            tracker = newSong;
+            songs = newSong;
         else {
             while (tracker->next != NULL)
                 tracker = tracker->next;
@@ -47,7 +47,7 @@
         while(found==false && tracker!=NULL){
             trail = tracker;
             tracker = tracker->next;
-            if(tracker->s == s){
+            if(tracker!=NULL && tracker->s == s){
                 found = true;
             }
         }
@@ -59,7 +59,27 @@
     }
 
     void UtPod::shuffle() {
+        if(songs == NULL)
+            return;
+        int songNumber = getNumSongs();
+        for(int i = 0; i<songNumber*2; i++){
+            SongNode *track1 = songs;
+            SongNode *track2 = songs;
+            int swap1 = rand()%songNumber;
+            int swap2 = rand()%songNumber;
+            if (swap1!=swap2){
+                for(int j = 0; j<swap1; j++)
+                    track1 = track1->next;
+                for(int j = 0; j<swap2; j++)
+                    track2 = track2->next;
+                Song *temp = new Song;
+                *temp = track1->s;
+                track1->s = track2->s;
+                track2->s = *temp;
+                delete(temp);
+            }
 
+        }
     }
     void UtPod::showSongList() {
         SongNode *tracker = songs;
@@ -68,3 +88,29 @@
             tracker = tracker->next;
         }
     }
+
+    void UtPod::sortSongList() {
+        if (songs == NULL)
+            return;
+        int numSongs = getNumSongs();
+        Song *songList = new Song[numSongs];
+        SongNode *tracker = songs;
+        int i = 0;
+        while (tracker != NULL) {
+            songList[i] = tracker->s;
+            tracker = tracker->next;
+        }
+    }
+
+        int UtPod::getNumSongs() {
+            SongNode *tracker = songs;
+            if (songs == NULL)
+                return 0;
+            int songNumber = 0;
+            while (tracker != NULL) {
+                songNumber++;
+                tracker = tracker->next;
+            }
+            return songNumber;
+        }
+

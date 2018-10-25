@@ -12,13 +12,17 @@ int main() {
     Song *firstSong = new Song("hello", "world", 1);
     Song *secondSong = new Song("test", "test",1);
     Song *thirdSong = new Song("test2", "test",1);
-    Song *fourthSong = new Song("test", "test2",1);
+    Song *fourthSong = new Song("test3", "test2",1);
     hi->addSong(*firstSong);
     hi->addSong(*secondSong);
     hi->addSong(*thirdSong);
     hi->addSong(*fourthSong);
     hi->showSongList();
+    cout <<"\n";
     hi->removeSong(*firstSong);
     hi->removeSong(*firstSong);
+    hi->showSongList();
+    cout <<"\n";
+    hi->shuffle();
     hi->showSongList();
 }

@@ -4,10 +4,18 @@
 
 #include "Song.h"
  using namespace std;
+    Song::Song(){
+        title = "";
+        artist = "";
+        size = 0;
+    }
     Song::Song(string title, string artist, int size) {
         this->title = title;
         this->artist = artist;
         this->size = size;
+    }
+    Song::~Song(){
+
     }
     string Song::getTitle() {
         return title;

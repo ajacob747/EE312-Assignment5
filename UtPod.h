@@ -24,6 +24,7 @@ private:
     SongNode *songs;  //the head pointer
 
     int memSize;
+    int getNumSongs();
 
 public:
     UtPod();
