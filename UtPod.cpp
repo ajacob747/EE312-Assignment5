@@ -7,7 +7,8 @@
 #include <iostream>
 
     UtPod::UtPod() {
-
+        memSize = MAX_MEMORY;
+        songs == NULL;
     }
     UtPod::UtPod(int size) {
         if(size>MAX_MEMORY || size<=0)
@@ -17,8 +18,8 @@
         songs == NULL;
     }
     int UtPod::addSong(Song const &s) {
-//      if (s.getSize()>getRemainingMemory())
-//            return NO_MEMORY;
+      if (s.getSize()>getRemainingMemory())
+            return NO_MEMORY;
         SongNode *newSong = new SongNode;
         newSong->s = s;
         newSong->next = NULL;
@@ -31,6 +32,7 @@
                 tracker = tracker->next;
             tracker->next = newSong;
         }
+        return SUCCESS;
     }
 
     int UtPod::removeSong(Song const &s) {
@@ -72,11 +74,7 @@
                     track1 = track1->next;
                 for(int j = 0; j<swap2; j++)
                     track2 = track2->next;
-                Song *temp = new Song;
-                *temp = track1->s;
-                track1->s = track2->s;
-                track2->s = *temp;
-                delete(temp);
+                swap(track1,track2);
             }
 
         }
@@ -84,33 +82,84 @@
     void UtPod::showSongList() {
         SongNode *tracker = songs;
         while(tracker!=NULL){
-            cout<<tracker->s.getTitle()+" "+ tracker->s.getArtist()+" "+tracker->s.getTitle()<<endl;
+            cout<<tracker->s.getTitle()+", "+ tracker->s.getArtist()+", "+ to_string(tracker->s.getSize())<<endl;
             tracker = tracker->next;
         }
     }
 
     void UtPod::sortSongList() {
-        if (songs == NULL)
+        if (songs == NULL || songs->next == NULL)
             return;
-        int numSongs = getNumSongs();
-        Song *songList = new Song[numSongs];
-        SongNode *tracker = songs;
-        int i = 0;
-        while (tracker != NULL) {
-            songList[i] = tracker->s;
-            tracker = tracker->next;
+        SongNode *i = songs;
+        SongNode *j;
+        SongNode *min;
+
+        while(i->next!=NULL){
+            min = i;
+            j=i->next;
+            while(j!=NULL){
+                if(j->s < min->s)
+                    min = j;
+                j = j->next;
+            }
+            if(i!=min){
+                swap(i,min);
+            }
+            i=i->next;
         }
     }
 
-        int UtPod::getNumSongs() {
-            SongNode *tracker = songs;
-            if (songs == NULL)
-                return 0;
-            int songNumber = 0;
-            while (tracker != NULL) {
-                songNumber++;
-                tracker = tracker->next;
-            }
-            return songNumber;
+    int UtPod::getRemainingMemory() {
+        SongNode *tracker = songs;
+        int size = 0;
+        while(tracker!=NULL){
+            size+=tracker->s.getSize();
+            tracker = tracker->next;
         }
+        return memSize-size;
+    }
+
+    void UtPod::clearMemory() {
+        if(songs == NULL)
+            return;
+        SongNode *tracker = songs->next;
+        SongNode *trail = tracker;
+        if(tracker== NULL) {
+            songs = NULL;
+            return;
+        }
+        tracker = tracker->next;
+        while(trail!=NULL){
+            delete(trail);
+            trail = tracker->next;
+            if(trail!=NULL)
+                tracker = tracker->next;
+        }
+        songs = NULL;
+    }
+
+    int UtPod::getNumSongs() {
+        SongNode *tracker = songs;
+        if (songs == NULL)
+            return 0;
+        int songNumber = 0;
+        while (tracker != NULL) {
+            songNumber++;
+            tracker = tracker->next;
+        }
+        return songNumber;
+    }
+
+    void UtPod::swap(UtPod::SongNode *a, UtPod::SongNode *b) {
+        Song *temp = new Song;
+        *temp = a->s;
+        a->s = b->s;
+        b->s = *temp;
+        delete(temp);
+    }
+
+    UtPod::~UtPod() {
+        clearMemory();
+        delete (songs);
+    }
 
