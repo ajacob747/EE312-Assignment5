@@ -15,7 +15,7 @@
             memSize = MAX_MEMORY;
         else
             memSize = size;
-        songs == NULL;
+        songs = NULL;
     }
     int UtPod::addSong(Song const &s) {
       if (s.getSize()>getRemainingMemory())
@@ -124,14 +124,14 @@
             return;
         SongNode *tracker = songs->next;
         SongNode *trail = tracker;
-        if(tracker== NULL) {
+        if(tracker== NULL && songs!=NULL) {
             songs = NULL;
             return;
         }
         tracker = tracker->next;
         while(trail!=NULL){
             delete(trail);
-            trail = tracker->next;
+            trail = tracker;
             if(trail!=NULL)
                 tracker = tracker->next;
         }
@@ -160,6 +160,5 @@
 
     UtPod::~UtPod() {
         clearMemory();
-        delete (songs);
     }
 

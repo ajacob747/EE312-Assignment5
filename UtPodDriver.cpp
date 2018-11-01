@@ -132,6 +132,48 @@ int main() {
     t.addSong(s2);
     t.addSong(s5);
     t.addSong(s1);
+    Song s7("Beatles", "Hey Jude4", 2);
+    t.addSong(s7);
+    Song s8("Beatles", "Hey Jude2",5);
+    t.addSong(s8);
+    cout << '\n';
+    //larger sort
+    t.sortSongList();
+    t.showSongList();
+    cout << '\n';
+    //another shuffle
+    t.shuffle();
+    t.showSongList();
+    t.removeSong(s1);
+    t.removeSong(s2);
+    t.removeSong(s3);
+    t.removeSong(s4);
+    t.removeSong(s5);
+    t.removeSong(s6);
+    t.removeSong(s7);
+    cout << '\n';
+    t.showSongList();
+    //shuffle and sort with one element
+    t.sortSongList();
+    t.shuffle();
+    t.showSongList();
+    t.clearMemory();
+    t.sortSongList();
+    t.showSongList();
+    // shuffle and sort with 0 elements;
+    t.shuffle();
+    t.showSongList();
+    t.~UtPod();
 
-
+    //create UtPod of different Size
+    UtPod s(256);
+    //add song too big
+    result = s.addSong(s6);
+    cout <<result;
+    result = s.getRemainingMemory();
+    cout <<result;
+    delete firstSong;
+    delete secondSong;
+    delete thirdSong;
+    delete fourthSong;
 }
