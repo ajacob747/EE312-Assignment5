@@ -8,7 +8,7 @@
 
     UtPod::UtPod() {
         memSize = MAX_MEMORY;
-        songs == NULL;
+        songs = NULL;
     }
     UtPod::UtPod(int size) {
         if(size>MAX_MEMORY || size<=0)
