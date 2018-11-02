@@ -37,16 +37,16 @@ int main() {
     int total;
     //total memory test
     total = hi->getTotalMemory();
-    cout<< "\n"+to_string(total)+"\n";
+    cout<< "\n" << total <<"\n";
     //remaining memory test
     int left = hi->getRemainingMemory();
-    cout<< to_string(left)+"\n";
+    cout<< left <<"\n";
     //clear memory test
     hi->clearMemory();
     hi->showSongList();
     //get remaining memory of empty list
     left = hi->getRemainingMemory();
-    cout<<to_string(left)+"\n";
+    cout << left << "\n";
     //adding after clear memory
     hi->addSong(*firstSong);
     hi->showSongList();
@@ -169,9 +169,12 @@ int main() {
     UtPod s(256);
     //add song too big
     result = s.addSong(s6);
-    cout <<result;
+    cout <<result<<endl;
     result = s.getRemainingMemory();
-    cout <<result;
+    total = s.getTotalMemory();
+    cout <<result <<endl;
+    cout <<total;
+    s.~UtPod();
     delete firstSong;
     delete secondSong;
     delete thirdSong;

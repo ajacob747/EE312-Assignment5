@@ -5,11 +5,13 @@
 #include "UtPod.h"
 #include "Song.h"
 #include <iostream>
+#include <cstdlib>
 
     UtPod::UtPod() {
         memSize = MAX_MEMORY;
         songs = NULL;
     }
+
     UtPod::UtPod(int size) {
         if(size>MAX_MEMORY || size<=0)
             memSize = MAX_MEMORY;
@@ -82,7 +84,7 @@
     void UtPod::showSongList() {
         SongNode *tracker = songs;
         while(tracker!=NULL){
-            cout<<tracker->s.getTitle()+", "+ tracker->s.getArtist()+", "+ to_string(tracker->s.getSize())<<endl;
+            cout<<tracker->s.getTitle()+", "+ tracker->s.getArtist()+", " << tracker->s.getSize()<<endl;
             tracker = tracker->next;
         }
     }
@@ -123,11 +125,13 @@
         if(songs == NULL)
             return;
         SongNode *tracker = songs->next;
-        SongNode *trail = tracker;
+        SongNode *trail = songs;
         if(tracker== NULL && songs!=NULL) {
+            delete trail;
             songs = NULL;
             return;
         }
+        trail = tracker;
         tracker = tracker->next;
         while(trail!=NULL){
             delete(trail);
@@ -135,6 +139,8 @@
             if(trail!=NULL)
                 tracker = tracker->next;
         }
+        tracker = songs;
+        delete tracker;
         songs = NULL;
     }
 

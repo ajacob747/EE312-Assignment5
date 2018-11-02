@@ -45,9 +45,9 @@ public:
 
        precondition: s is a valid Song
 
-       input parms -
+       input parms - Song &s
 
-       output parms -
+       output parms - success/no_memory
       */
     int addSong(Song const &s);
 
@@ -58,9 +58,9 @@ public:
           o returns -2 if nothing is removed
 
 
-        input parms -
+        input parms - Song &s
 
-        output parms -
+        output parms - success/not_found int.
      */
     int removeSong(Song const &s);
 
@@ -68,9 +68,9 @@ public:
      *  shuffles the songs into random order
         o will do nothing if there are less than two songs in the current list
 
-       input parms -
+       input parms - none
 
-       output parms -
+       output parms - none
     */
     void shuffle();
     /* FUNCTION - void showSongList
@@ -86,9 +86,9 @@ public:
      *  sorts the songs in ascending order
         o will do nothing if there are less than two songs in the current list
 
-       input parms -
+       input parms - none
 
-       output parms -
+       output parms - none
     */
 
     void sortSongList();
@@ -96,9 +96,9 @@ public:
     /* FUNCTION - void clearMemory
       * clears all the songs from memory
 
-        input parms -
+        input parms - none
 
-        output parms -
+        output parms - none
     */
     void clearMemory();
 
@@ -106,9 +106,9 @@ public:
  *  returns the total amount of memory in the UtPod
     o will do nothing if there are less than two songs in the current list
 
-   input parms -
+   input parms - none
 
-   output parms -
+   output parms - Size int
     */
     int getTotalMemory() {
         return memSize;
@@ -117,12 +117,13 @@ public:
     /* FUNCTION - int getRemainingMemory
       *  returns the amount of memory available for adding new songs
 
-        input parms -
+        input parms - none
 
-        output parms -
+        output parms - int remaining memory
     */
     int getRemainingMemory();
 
+    //destructor
     ~UtPod();
 
 };
