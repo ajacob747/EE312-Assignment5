@@ -173,8 +173,13 @@ int main() {
     result = s.getRemainingMemory();
     total = s.getTotalMemory();
     cout <<result <<endl;
-    cout <<total;
+    cout <<total<< endl;
     s.~UtPod();
+    firstSong->setTitle("Set");
+    firstSong->setArtist("Test");
+    firstSong->setSize(200);
+    //song setter/getter tester
+    cout << firstSong->getTitle() +" " + firstSong->getArtist()+" " << firstSong->getSize()<<endl;
     delete firstSong;
     delete secondSong;
     delete thirdSong;
